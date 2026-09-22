@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  <defs>
+    <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#c1)"/>
+  <circle cx="340" cy="46" r="70" fill="#ffffff" opacity="0.12"/>
+  <circle cx="58" cy="206" r="48" fill="#ffffff" opacity="0.10"/>
+
+  <!-- 咖啡杯：Java 的经典意象 -->
+  <g transform="translate(146 62)">
+    <path d="M0 34 h78 v22 a30 30 0 0 1 -30 30 h-18 a30 30 0 0 1 -30 -30 z"
+          fill="#ffffff" opacity="0.95"/>
+    <path d="M78 42 h10 a14 14 0 0 1 0 28 h-10" fill="none" stroke="#ffffff"
+          stroke-width="7" opacity="0.95"/>
+    <rect x="-6" y="86" width="90" height="8" rx="4" fill="#ffffff" opacity="0.7"/>
+    <path d="M22 20 q6 -10 0 -20" fill="none" stroke="#ffffff" stroke-width="4"
+          stroke-linecap="round" opacity="0.75"/>
+    <path d="M42 18 q6 -10 0 -20" fill="none" stroke="#ffffff" stroke-width="4"
+          stroke-linecap="round" opacity="0.55"/>
+  </g>
+
+  <text x="200" y="204" font-family="Microsoft YaHei, sans-serif" font-size="24"
+        font-weight="bold" fill="#ffffff" text-anchor="middle">Java 语言基础</text>
+</svg>

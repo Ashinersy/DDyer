@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Java Web 学习中心">
+    <meta name="description" content="Java Web 学习中心——课程介绍、学习宣传视频与在线报名">
+    <title>Java Web 学习中心 | 首页</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+
+<style>
+/* ==========================================================================
+   CSS 样式表
+   本样式表依次演示了三种基本选择器：
+     一、标签选择器（元素选择器）——直接以 HTML 标签名作为选择器
+     二、类选择器（class 选择器）——以 .类名 作为选择器
+     三、ID 选择器（id 选择器）——以 #id名 作为选择器
+   另有若干伪类选择器（:hover 等）作为补充。
+   ========================================================================== */
+
+/* ---------- 全局变量与基础重置 ---------- */
+:root {
+    --primary:       #2563eb;
+    --primary-dark:  #1e3a8a;
+    --primary-light: #eff6ff;
+    --accent:        #f59e0b;
+    --text:          #1e293b;
+    --muted:         #64748b;
+    --bg:            #f8fafc;
+    --card:          #ffffff;
+    --border:        #e2e8f0;
+    --radius:        14px;
+    --shadow:        0 4px 16px rgba(15, 23, 42, 0.07);
+    --shadow-lg:     0 12px 32px rgba(15, 23, 42, 0.13);
+}
+
+
+/* ==========================================================================
+   一、标签选择器
+   直接写标签名，选中页面中所有该种标签，统一设定基础样式。
+   ========================================================================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+h1 {
+    font-size: 2.6rem;
+    line-height: 1.3;
+    margin: 0 0 16px;
+    color: var(--primary-dark);
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 0 0 12px;
+    color: var(--primary-dark);
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 0 0 10px;
+    color: var(--text);
+}
+
+p {
+    margin: 0 0 16px;
+    color: var(--text);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    border-radius: var(--radius);
+}
+
+video {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius);
+    background-color: #0f172a;
+}
+
+audio {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* 表格：标签选择器 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 24px;
+    background-color: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+th {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+}
+
+/* 表单控件：标签选择器 */
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text);
+    background-color: #ffffff;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+/* 伪类选择器：获得焦点时高亮 */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.13);
+}
+
+blockquote {
+    margin: 24px 0;
+    padding: 16px 24px;
+    background-color: var(--primary-light);
+    border-left: 5px solid var(--primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--primary-dark);
+    font-style: italic;
+}
+
+ul {
+    padding-left: 22px;
+    color: var(--muted);
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+}
+
+/* 伪类选择器：鼠标悬停时超链接变色并加下划线 */
+a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   二、类选择器
+   以「.类名」定义，可被多个标签重复使用，用 class="类名" 引用。
+   ========================================================================== */
+
+/* --- 布局容器 --- */
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- 顶部导航栏 --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    box-shadow: var(--shadow);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+.nav-brand img {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--muted);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* --- 内容区块 --- */
+.section {
+    padding: 64px 0;
+}
+
+.section-alt {
+    background-color: #ffffff;
+}
+
+.section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 44px;
+}
+
+.section-head p {
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.eyebrow {
+    display: inline-block;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+}
+
+/* --- 首屏 --- */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero-text {
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 32px;
+    margin: 28px 0;
+    flex-wrap: wrap;
+}
+
+.stat-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* --- 按钮 --- */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.38);
+}
+
+.btn-ghost {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-ghost:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.btn-reset {
+    background-color: #f1f5f9;
+    color: var(--muted);
+    border: 2px solid var(--border);
+}
+
+.btn-reset:hover {
+    background-color: #e2e8f0;
+    color: var(--text);
+}
+
+.btn-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* --- 卡片 --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card img {
+    border-radius: 0;
+    width: 100%;
+}
+
+.card-body {
+    padding: 22px 24px 26px;
+}
+
+.card-body p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background-color: #fef3c7;
+    color: #b45309;
+    margin-bottom: 12px;
+}
+
+/* --- 视频区 --- */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+}
+
+.video-item {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+}
+
+.video-item h3 {
+    margin-bottom: 4px;
+}
+
+.video-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+/* --- 音频区 --- */
+.audio-box {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background-color: var(--primary-light);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+}
+
+.audio-icon {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* --- 表单 --- */
+.form-wrap {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.form-row {
+    margin-bottom: 24px;
+}
+
+.form-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* 单选 / 复选选项组 */
+.check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding: 12px 14px;
+    background-color: #f8fafc;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+}
+
+.check-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: normal;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.check-item input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--primary);
+    cursor: pointer;
+    margin: 0;
+}
+
+.hint {
+    display: block;
+    font-size: 0.83rem;
+    font-weight: normal;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.required {
+    color: #dc2626;
+}
+
+/* --- 页脚 --- */
+.footer {
+    background-color: #0f172a;
+    color: #94a3b8;
+    padding: 48px 0 28px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 36px;
+    margin-bottom: 36px;
+}
+
+.footer h4 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 0 0 14px;
+}
+
+.footer p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 9px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    border-top: 1px solid #1e293b;
+    padding-top: 22px;
+    text-align: center;
+    font-size: 0.87rem;
+    color: #64748b;
+}
+
+/* --- 响应式：小屏幕下改为单列 --- */
+@media (max-width: 820px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    .hero-grid,
+    .form-2col { grid-template-columns: 1fr; }
+    .audio-box { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+    .form-wrap { padding: 26px 20px; }
+    .section { padding: 44px 0; }
+}
+
+
+/* ==========================================================================
+   三、ID 选择器
+   以「#id名」定义，在整个页面中只作用于唯一一个 id 的元素，优先级最高。
+   ========================================================================== */
+
+/* 页面顶部导航（唯一） */
+#top-header {
+    position: relative;
+}
+
+/* 页面主标题（唯一） */
+#main-title {
+    background: linear-gradient(120deg, #1e3a8a 0%, #2563eb 55%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+/* 首屏展示图片（唯一） */
+#hero-image {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* 报名表单（唯一）—— 单独设定更宽的间距 */
+#signup-form {
+    margin-top: 8px;
+}
+
+#signup-form .form-row:last-of-type {
+    margin-bottom: 30px;
+}
+
+/* 页脚版权区（唯一） */
+#copyright {
+    letter-spacing: 0.5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ==================== 顶部导航栏 ==================== -->
+<header id="top-header">
+    <nav class="navbar">
+        <a href="#top-header" class="nav-brand">
+            <img src="images/logo.svg" alt="Java Web 学习中心 徽标">
+            <span>Java Web 学习中心</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#hero">首页</a></li>
+            <li><a href="#courses">课程体系</a></li>
+            <li><a href="#videos">宣传视频</a></li>
+            <li><a href="#audio">音频导览</a></li>
+            <li><a href="#signup">在线报名</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ==================== 首屏 ==================== -->
+<section class="section" id="hero">
+    <div class="container hero-grid">
+
+        <div class="hero-text">
+            <span class="eyebrow">JAVA WEB · 从入门到实战</span>
+            <h1 id="main-title">写好每一行代码，<br>构建属于你的 Web 世界</h1>
+
+            <p>
+                「Java Web 学习中心」是一门面向零基础学习者的完整课程。
+                我们从 Java 语言基础讲起，逐步深入到 HTML / CSS 页面制作、
+                Servlet 与 JSP 动态网页开发，最后完成一个可部署上线的完整项目。
+            </p>
+
+            <p>
+                课程采用「边讲边练」的方式，每个知识点都配有可运行的示例代码。
+                无论你是计算机专业的学生，还是希望转行进入软件开发行业的在职人员，
+                都能在这里找到一条清晰的成长路径。
+            </p>
+
+            <!-- 超链接：页内锚点 -->
+            <div class="btn-row">
+                <a href="#signup" class="btn btn-primary">立即免费报名 →</a>
+                <a href="#videos" class="btn btn-ghost">观看宣传视频</a>
+            </div>
+
+            <!-- 数据展示 -->
+            <div class="hero-stats">
+                <div>
+                    <span class="stat-num">128</span>
+                    <span class="stat-label">课时总量</span>
+                </div>
+                <div>
+                    <span class="stat-num">24</span>
+                    <span class="stat-label">实战项目</span>
+                </div>
+                <div>
+                    <span class="stat-num">9.6</span>
+                    <span class="stat-label">学员评分</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <!-- 图片 -->
+            <img id="hero-image" src="images/hero.svg"
+                 alt="Java Web 开发示意图：浏览器窗口中的 HTML 代码与课程标签">
+        </div>
+
+    </div>
+</section>
+
+<!-- ==================== 课程体系 ==================== -->
+<section class="section section-alt" id="courses">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">课程体系</span>
+            <h2>三大模块，循序渐进</h2>
+            <p>由浅入深的知识结构，帮你把零散的知识点连成一条完整的技能链。</p>
+        </div>
+
+        <div class="card-grid">
+
+            <!-- 卡片一 -->
+            <article class="card">
+                <img src="images/course-java.svg" alt="Java 语言基础课程封面">
+                <div class="card-body">
+                    <span class="tag">第一阶段</span>
+                    <h3>Java 语言基础</h3>
+                    <p>
+                        掌握变量、运算符、流程控制、数组、面向对象编程与异常处理，
+                        打牢后续 Web 开发所必需的语言功底。
+                    </p>
+                </div>
+            </article>
+
+            <!-- 卡片二 -->
+            <article class="card">
+                <img src="images/course-web.svg" alt="HTML 与 CSS 前端课程封面">
+                <div class="card-body">
+                    <span class="tag">第二阶段</span>
+                    <h3>HTML / CSS 前端</h3>
+                    <p>
+                        学会使用标签搭建页面结构，用 CSS 选择器与盒模型完成美观的
+                        页面布局，并实现响应式适配。
+                    </p>
+                </div>
+            </article>
+
+            <!-- 卡片三 -->
+            <article class="card">
+                <img src="images/course-db.svg" alt="数据库与 JDBC 课程封面">
+                <div class="card-body">
+                    <span class="tag">第三阶段</span>
+                    <h3>数据库与 JDBC</h3>
+                    <p>
+                        学习 MySQL 建库建表与 SQL 查询语句，通过 JDBC 让 Java 程序
+                        与数据库真正打通，实现数据的持久化存储。
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- 表格：课程安排 -->
+        <h3 style="margin-top:48px;">课程安排一览</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>阶段</th>
+                    <th>核心内容</th>
+                    <th>课时</th>
+                    <th>配套项目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>第一阶段</td>
+                    <td>Java 语法、面向对象、集合框架</td>
+                    <td>42 课时</td>
+                    <td>控制台图书管理系统</td>
+                </tr>
+                <tr>
+                    <td>第二阶段</td>
+                    <td>HTML 标签、CSS 选择器、页面布局</td>
+                    <td>38 课时</td>
+                    <td>本学习中心宣传网站</td>
+                </tr>
+                <tr>
+                    <td>第三阶段</td>
+                    <td>MySQL、JDBC、Servlet、JSP</td>
+                    <td>48 课时</td>
+                    <td>学生信息管理系统</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <blockquote>
+            「学习编程最好的方式，就是亲手把代码敲一遍，再让它跑起来。」
+        </blockquote>
+
+    </div>
+</section>
+
+<!-- ==================== 学习宣传视频 ==================== -->
+<section class="section" id="videos">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">宣传视频</span>
+            <h2>用两分钟，了解这门课</h2>
+            <p>点击下方播放按钮即可在线观看。视频支持暂停、快进与全屏播放。</p>
+        </div>
+
+        <div class="video-grid">
+
+            <!-- 视频一 -->
+            <div class="video-item">
+                <h3>学习宣传视频（一）</h3>
+                <p class="video-desc">课程整体介绍 · 从这里开始，走进 Java Web 的世界</p>
+                <video src="视频1_h264.mp4"
+                       controls
+                       preload="metadata">
+                    您的浏览器不支持 HTML5 视频播放，请使用较新版本的 Chrome、Edge 或 Firefox 浏览器。
+                </video>
+            </div>
+
+            <!-- 视频二 -->
+            <div class="video-item">
+                <h3>学习宣传视频（二）</h3>
+                <p class="video-desc">项目实战演练 · 把知识变成真正解决问题的能力</p>
+                <video src="视频2_h264.mp4"
+                       controls
+                       preload="metadata">
+                    您的浏览器不支持 HTML5 视频播放，请使用较新版本的 Chrome、Edge 或 Firefox 浏览器。
+                </video>
+            </div>
+
+        </div>
+
+        <p style="margin-top:24px; font-size:0.92rem; color:var(--muted);">
+            提示：如果视频无法播放，请确认 <code>视频1_h264.mp4</code> 与 <code>视频2_h264.mp4</code>
+            与本页面位于同一目录下。
+        </p>
+
+    </div>
+</section>
+
+<!-- ==================== 音频导览 ==================== -->
+<section class="section section-alt" id="audio">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">音频导览</span>
+            <h2>课程片头曲</h2>
+            <p>一段轻快的片头音乐，每节视频课开始时都会响起。</p>
+        </div>
+
+        <div class="audio-box">
+            <div class="audio-icon">♪</div>
+            <div style="width:100%;">
+                <h3>Java Web 学习中心 · 片头曲</h3>
+                <p class="video-desc">时长约 12 秒 · WAV 格式 · 适合作为课程视频背景音乐</p>
+                <!-- 音频 -->
+                <audio src="audio/课程片头曲.wav" controls preload="metadata">
+                    您的浏览器不支持 HTML5 音频播放。
+                </audio>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ==================== 在线报名表单 ==================== -->
+<section class="section" id="signup">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">在线报名</span>
+            <h2>填写基本信息，加入我们</h2>
+            <p>带 <span class="required">*</span> 号的为必填项。提交后我们会在一个工作日内与您联系。</p>
+        </div>
+
+        <div class="form-wrap">
+            <!--
+                说明：action 指向 register.jsp。
+                该文件将在后续「Servlet / JSP」阶段编写，用于接收并处理本表单提交的数据。
+                当前仅静态页面，尚未创建 register.jsp，点击提交会提示找不到页面，属正常现象。
+            -->
+            <form id="signup-form" action="register.jsp" method="post">
+
+                <!-- 文本输入框 -->
+                <div class="form-row">
+                    <label for="username">姓名 <span class="required">*</span></label>
+                    <input type="text" id="username" name="username"
+                           placeholder="请输入您的真实姓名" maxlength="20" required>
+                </div>
+
+                <!-- 密码框 -->
+                <div class="form-row">
+                    <label for="password">登录密码 <span class="required">*</span></label>
+                    <input type="password" id="password" name="password"
+                           placeholder="请设置 6～16 位密码" minlength="6" maxlength="16" required>
+                    <span class="hint">密码由 6 到 16 个字符组成，建议同时包含字母和数字。</span>
+                </div>
+
+                <!-- 两列布局：邮箱 + 手机 -->
+                <div class="form-2col">
+                    <div class="form-row">
+                        <label for="email">电子邮箱 <span class="required">*</span></label>
+                        <input type="email" id="email" name="email"
+                               placeholder="example@mail.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="phone">手机号码</label>
+                        <input type="tel" id="phone" name="phone"
+                               placeholder="11 位手机号"
+                               pattern="1[3-9]\d{9}" title="请输入 11 位有效手机号码">
+                    </div>
+                </div>
+
+                <!-- 单选按钮组 -->
+                <div class="form-row">
+                    <label>性别</label>
+                    <div class="check-group">
+                        <label class="check-item">
+                            <input type="radio" name="gender" value="male" checked> 男
+                        </label>
+                        <label class="check-item">
+                            <input type="radio" name="gender" value="female"> 女
+                        </label>
+                        <label class="check-item">
+                            <input type="radio" name="gender" value="secret"> 保密
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 两列布局：出生日期 + 年龄 -->
+                <div class="form-2col">
+                    <div class="form-row">
+                        <label for="birthday">出生日期</label>
+                        <input type="date" id="birthday" name="birthday">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="study-time">每周可学习时长（小时）</label>
+                        <input type="number" id="study-time" name="studyTime"
+                               min="1" max="60" step="1" value="10">
+                    </div>
+                </div>
+
+                <!-- 下拉列表 -->
+                <div class="form-row">
+                    <label for="education">最高学历 <span class="required">*</span></label>
+                    <select id="education" name="education" required>
+                        <option value="">— 请选择 —</option>
+                        <option value="highschool">高中 / 中专</option>
+                        <option value="college">大专</option>
+                        <option value="bachelor" selected>本科</option>
+                        <option value="master">硕士研究生</option>
+                        <option value="doctor">博士研究生</option>
+                    </select>
+                </div>
+
+                <!-- 下拉列表（可多选） -->
+                <div class="form-row">
+                    <label for="direction">感兴趣的方向</label>
+                    <select id="direction" name="direction" size="4" multiple>
+                        <option value="java">Java 语言基础</option>
+                        <option value="frontend">HTML / CSS 前端开发</option>
+                        <option value="database">数据库与 JDBC</option>
+                        <option value="servlet">Servlet 与 JSP 动态网页</option>
+                        <option value="project">综合项目实战</option>
+                    </select>
+                    <span class="hint">按住 Ctrl 键（Mac 上按住 Command 键）可同时选择多项。</span>
+                </div>
+
+                <!-- 复选框组 -->
+                <div class="form-row">
+                    <label>基础情况（可多选）</label>
+                    <div class="check-group">
+                        <label class="check-item">
+                            <input type="checkbox" name="base" value="java-basic"> 学过 Java 语法
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" name="base" value="html-basic"> 学过 HTML
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" name="base" value="sql-basic"> 学过 SQL
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" name="base" value="none"> 零基础
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 下拉列表：上课时间 -->
+                <div class="form-row">
+                    <label for="class-period">希望的上课时间段</label>
+                    <select id="class-period" name="classPeriod">
+                        <option value="morning">上午（09:00 — 12:00）</option>
+                        <option value="afternoon" selected>下午（14:00 — 17:00）</option>
+                        <option value="evening">晚上（19:00 — 21:00）</option>
+                        <option value="weekend">周末全天</option>
+                    </select>
+                </div>
+
+                <!-- 文本域 -->
+                <div class="form-row">
+                    <label for="intro">个人简介 / 学习目标</label>
+                    <textarea id="intro" name="intro" rows="6"
+                              placeholder="请简单介绍一下你自己，以及希望通过这门课程达到什么目标……"></textarea>
+                    <span class="hint">不超过 300 字，可留空。</span>
+                </div>
+
+                <!-- 文件上传 -->
+                <div class="form-row">
+                    <label for="photo">上传个人头像（可选）</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
+
+                <!-- 同意条款 -->
+                <div class="form-row">
+                    <div class="check-group">
+                        <label class="check-item">
+                            <input type="checkbox" name="agree" value="yes" required>
+                            我已阅读并同意
+                            <a href="#signup" style="margin-left:4px;">《课程服务条款》</a>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 提交与重置 -->
+                <div class="btn-row">
+                    <input type="submit" class="btn btn-primary" value="提交报名信息">
+                    <input type="reset" class="btn btn-reset" value="重置表单">
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div>
+                <h4>Java Web 学习中心</h4>
+                <p>
+                    一门面向零基础学习者的完整 Web 开发课程，
+                    帮助你从语法基础一路走到项目上线。
+                </p>
+            </div>
+
+            <div>
+                <h4>快速导航</h4>
+                <ul class="footer-links">
+                    <li><a href="#hero">首页</a></li>
+                    <li><a href="#courses">课程体系</a></li>
+                    <li><a href="#videos">宣传视频</a></li>
+                    <li><a href="#signup">在线报名</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>学习资源</h4>
+                <ul class="footer-links">
+                    <!-- 超链接：外部网站，在新标签页中打开 -->
+                    <li>
+                        <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML"
+                           target="_blank" rel="noopener">MDN · HTML 参考文档</a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS"
+                           target="_blank" rel="noopener">MDN · CSS 参考文档</a>
+                    </li>
+                    <li>
+                        <a href="https://www.oracle.com/java/technologies/downloads/"
+                           target="_blank" rel="noopener">Oracle · JDK 下载</a>
+                    </li>
+                    <li>
+                        <a href="https://www.w3school.com.cn/"
+                           target="_blank" rel="noopener">W3School 在线教程</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>联系我们</h4>
+                <ul class="footer-links">
+                    <!-- 超链接：电子邮件与电话 -->
+                    <li><a href="mailto:study@javaweb-center.example">study@javaweb-center.example</a></li>
+                    <li><a href="tel:+8613800138000">138-0013-8000</a></li>
+                    <li>周一至周五 09:00 — 18:00</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p id="copyright">
+                © 2026 Java Web 学习中心 · 本页面为 HTML + CSS 课程练习作品，仅供教学演示使用
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+</body>
+</html>

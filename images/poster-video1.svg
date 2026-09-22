@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="p1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#p1)"/>
+
+  <!-- 网格纹理 -->
+  <g stroke="#3b82f6" stroke-width="1" opacity="0.18">
+    <path d="M0 60 H640 M0 120 H640 M0 180 H640 M0 240 H640 M0 300 H640"/>
+    <path d="M80 0 V360 M160 0 V360 M240 0 V360 M320 0 V360
+             M400 0 V360 M480 0 V360 M560 0 V360"/>
+  </g>
+
+  <!-- 播放按钮 -->
+  <circle cx="320" cy="152" r="52" fill="#ffffff" opacity="0.14"/>
+  <circle cx="320" cy="152" r="38" fill="#ffffff" opacity="0.95"/>
+  <path d="M310 134 L344 152 L310 170 Z" fill="#1e3a8a"/>
+
+  <text x="320" y="248" font-family="Microsoft YaHei, sans-serif" font-size="28"
+        font-weight="bold" fill="#ffffff" text-anchor="middle">学习宣传视频（一）</text>
+  <text x="320" y="282" font-family="Microsoft YaHei, sans-serif" font-size="16"
+        fill="#93c5fd" text-anchor="middle">从这里开始，走进 Java Web 的世界</text>
+</svg>
