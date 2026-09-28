@@ -547,6 +547,78 @@ a:hover {
     color: #dc2626;
 }
 
+/* --- 费用表格：斑马纹悬停效果 ---
+   使用结构伪类 :nth-child() 区分奇数行与偶数行，
+   再叠加 :hover 实现「鼠标经过变色」。            */
+.zebra-table tbody tr {
+    transition: background-color 0.25s ease;
+}
+
+/* 奇数行：鼠标经过背景变黄 */
+.zebra-table tbody tr:nth-child(odd):hover {
+    background-color: #fef08a;
+}
+
+/* 偶数行：鼠标经过背景变蓝 */
+.zebra-table tbody tr:nth-child(even):hover {
+    background-color: #bfdbfe;
+}
+
+/* 变色后把文字加深，保证可读性 */
+.zebra-table tbody tr:hover td {
+    color: var(--text);
+}
+
+.zebra-table td:last-child {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* --- 支付区 --- */
+.pay-box {
+    margin-top: 44px;
+    padding: 36px 32px;
+    text-align: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.pay-price {
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--primary);
+}
+
+.pay-price small {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--muted);
+    margin-left: 8px;
+}
+
+.pay-methods {
+    margin: 10px 0 24px;
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.btn-pay {
+    padding: 14px 52px;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+}
+
+.btn-pay:hover {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(217, 119, 6, 0.45);
+}
+
 /* --- 页脚 --- */
 .footer {
     background-color: #0f172a;
@@ -671,6 +743,7 @@ a:hover {
             <li><a href="#videos">宣传视频</a></li>
             <li><a href="#audio">音频导览</a></li>
             <li><a href="#signup">在线报名</a></li>
+            <li><a href="#payment">报名费用</a></li>
         </ul>
     </nav>
 </header>
@@ -1062,6 +1135,73 @@ a:hover {
     </div>
 </section>
 
+<!-- ==================== 报名费用与支付 ==================== -->
+<section class="section section-alt" id="payment">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">报名费用</span>
+            <h2>选择适合你的班型</h2>
+            <p>
+                所有班型均包含全套课程资料、源码与课后答疑服务。
+                把鼠标移到下方表格的任意一行，可以看到该行高亮显示。
+            </p>
+        </div>
+
+        <!-- 费用明细表格：奇数行悬停变黄，偶数行悬停变蓝 -->
+        <table class="zebra-table">
+            <thead>
+                <tr>
+                    <th>班型</th>
+                    <th>上课形式</th>
+                    <th>课时</th>
+                    <th>有效期</th>
+                    <th>费用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>基础班</td>
+                    <td>录播课程 + 社群答疑</td>
+                    <td>42 课时</td>
+                    <td>6 个月</td>
+                    <td>¥ 199</td>
+                </tr>
+                <tr>
+                    <td>进阶班</td>
+                    <td>直播授课 + 录播回放</td>
+                    <td>80 课时</td>
+                    <td>12 个月</td>
+                    <td>¥ 399</td>
+                </tr>
+                <tr>
+                    <td>全能班</td>
+                    <td>直播授课 + 一对一带练</td>
+                    <td>128 课时</td>
+                    <td>24 个月</td>
+                    <td>¥ 699</td>
+                </tr>
+                <tr>
+                    <td>企业定制班</td>
+                    <td>线下上门授课</td>
+                    <td>按需定制</td>
+                    <td>按需定制</td>
+                    <td>面议</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 支付区 -->
+        <div class="pay-box">
+            <div class="pay-price">¥ 399 <small>/ 进阶班</small></div>
+            <p class="pay-methods">支持微信支付 · 支付宝 · 银行转账</p>
+
+            <button type="button" id="pay-btn" class="btn btn-pay">立即支付</button>
+        </div>
+
+    </div>
+</section>
+
 <!-- ==================== 页脚 ==================== -->
 <footer class="footer">
     <div class="container">
@@ -1083,6 +1223,7 @@ a:hover {
                     <li><a href="#courses">课程体系</a></li>
                     <li><a href="#videos">宣传视频</a></li>
                     <li><a href="#signup">在线报名</a></li>
+                    <li><a href="#payment">报名费用</a></li>
                 </ul>
             </div>
 
@@ -1129,6 +1270,18 @@ a:hover {
 
     </div>
 </footer>
+
+<script>
+/* ==========================================================================
+   支付按钮交互
+   需求：点击「立即支付」后不做真实支付，先跳转到一个空白中转页面，
+        由该页面显示 3 秒倒计时，倒计时结束后自动返回首页。
+   说明：本页面为课程练习，未接入任何真实支付接口，按钮只有演示效果。
+   ========================================================================== */
+document.getElementById('pay-btn').addEventListener('click', function () {
+    window.location.href = '支付.html';   // 跳转到支付中转页
+});
+</script>
 
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付处理中 | Java Web 学习中心</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+
+<style>
+/* 支付中转页：一个极简的空白页面，只负责显示倒计时并在结束后返回首页 */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #64748b;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 加载转圈动画 */
+.spinner {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 26px;
+    border: 4px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#countdown {
+    margin: 0;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+}
+
+#countdown b {
+    margin: 0 5px;
+    font-size: 1.5rem;
+    color: #2563eb;
+}
+</style>
+</head>
+
+<body>
+
+    <div class="spinner"></div>
+    <p id="countdown">支付处理中 ·<b>3</b>秒后自动返回首页</p>
+
+<script>
+/* 倒计时 3 秒，结束后自动跳回首页 */
+var seconds = 3;
+var box     = document.getElementById('countdown');
+
+var timer = setInterval(function () {
+    seconds--;
+
+    if (seconds > 0) {
+        box.innerHTML = '支付处理中 ·<b>' + seconds + '</b>秒后自动返回首页';
+    } else {
+        clearInterval(timer);
+        box.innerHTML = '正在返回首页…';
+        window.location.href = '首页.html';
+    }
+}, 1000);
+</script>
+
+</body>
+</html>
