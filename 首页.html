@@ -505,6 +505,98 @@ a:hover {
     gap: 24px;
 }
 
+/* 省市区三级联动：三个下拉框并排 */
+.form-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* --- 学员信息表（Vue 数据渲染） --- */
+.student-box {
+    margin-bottom: 30px;
+    padding: 26px 24px 20px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.student-box h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 6px;
+}
+
+/* 标题左侧的小竖条 */
+.student-box h3::before {
+    content: "";
+    width: 5px;
+    height: 19px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #3b82f6, #1e3a8a);
+}
+
+.student-tip {
+    margin: 0 0 18px 14px;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.student-table {
+    margin: 0;
+}
+
+.student-table th,
+.student-table td {
+    padding: 12px 16px;
+}
+
+.student-table td {
+    vertical-align: middle;
+    color: var(--text);
+}
+
+/* 头像列 */
+.col-avatar {
+    width: 88px;
+    text-align: center;
+}
+
+.avatar {
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px #ffffff, 0 2px 8px rgba(15, 23, 42, 0.16);
+}
+
+/* 姓名列 */
+.col-name {
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+/* 性别标签 */
+.gender-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: bold;
+}
+
+.gender-male {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.gender-female {
+    background-color: #fce7f3;
+    color: #be185d;
+}
+
 /* 单选 / 复选选项组 */
 .check-group {
     display: flex;
@@ -677,7 +769,8 @@ a:hover {
     h1 { font-size: 2rem; }
     h2 { font-size: 1.6rem; }
     .hero-grid,
-    .form-2col { grid-template-columns: 1fr; }
+    .form-2col,
+    .form-3col { grid-template-columns: 1fr; }
     .audio-box { grid-template-columns: 1fr; text-align: center; justify-items: center; }
     .form-wrap { padding: 26px 20px; }
     .section { padding: 44px 0; }
@@ -1011,6 +1104,62 @@ a:hover {
                     </div>
                 </div>
 
+                <!-- Vue 数据渲染：学员信息表 -->
+                <div class="student-box" id="student-app">
+                    <h3>学员信息</h3>
+                    <p class="student-tip">
+                
+                    </p>
+
+                    <table class="student-table">
+                        <thead>
+                            <tr>
+                                <th>头像</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>专业</th>
+                                <th>班级</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="student in students" :key="student.id">
+                                <td class="col-avatar">
+                                    <img class="avatar" :src="student.avatar" :alt="student.name">
+                                </td>
+                                <td class="col-name">{{ student.name }}</td>
+                                <td>
+                                    <span class="gender-tag"
+                                          :class="student.gender === '男' ? 'gender-male' : 'gender-female'">
+                                        {{ student.gender }}
+                                    </span>
+                                </td>
+                                <td>{{ student.major }}</td>
+                                <td>{{ student.className }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 省市区三级联动 -->
+                <div class="form-row">
+                    <label for="province">所在地区（省 / 市 / 区）</label>
+                    <div class="form-3col">
+                        <select id="province" name="province">
+                            <option value="">加载中…</option>
+                        </select>
+                        <select id="city" name="city">
+                            <option value="">加载中…</option>
+                        </select>
+                        <select id="area" name="area">
+                            <option value="">加载中…</option>
+                        </select>
+                    </div>
+                    <span class="hint">
+                        选择省份后，市与区会自动更新，并默认选中第一个。
+                        北京、上海、天津、重庆为直辖市，市这一级与省同名。
+                    </span>
+                </div>
+
                 <!-- 单选按钮组 -->
                 <div class="form-row">
                     <label>性别</label>
@@ -1144,7 +1293,6 @@ a:hover {
             <h2>选择适合你的班型</h2>
             <p>
                 所有班型均包含全套课程资料、源码与课后答疑服务。
-                把鼠标移到下方表格的任意一行，可以看到该行高亮显示。
             </p>
         </div>
 
@@ -1281,6 +1429,165 @@ a:hover {
 document.getElementById('pay-btn').addEventListener('click', function () {
     window.location.href = '支付.html';   // 跳转到支付中转页
 });
+</script>
+
+<script>
+/* ==========================================================================
+   省市区三级联动
+   --------------------------------------------------------------------------
+   数据来源（黑马程序员教学接口，数据均为演示数据）：
+     省：https://web-server.itheima.net/province
+     市：https://web-server.itheima.net/city?pid=省份id
+     区：https://web-server.itheima.net/area?cid=城市id
+   返回格式：{ code: 1, msg: "success", data: [ { id, name }, ... ] }
+
+   联动逻辑：
+     · 页面加载完毕 -> 加载全部省份填入「省」，默认选中第 1 个
+                    -> 用第 1 个省的 id 加载「市」，默认选中第 1 个
+                    -> 用第 1 个市的 id 加载「区」，默认选中第 1 个
+     · 切换省份     -> 重新加载该省下的市，并接着加载新的第 1 个市下的区
+     · 切换城市     -> 重新加载该市下的区
+
+   直辖市特殊处理（北京 / 上海 / 天津 / 重庆）：
+     这四个市下面没有地级市，接口把「区」直接挂在了省的下级，
+     所以 /city?pid=1 返回的其实是「区」，/area?cid=72 返回的是「街道」。
+     为了让三级始终呈现「省 -> 市 -> 区」的形态，直辖市的「市」这一级
+     用省本身来填充（省与市同名），第三级的区则改从 /city?pid=省id 取。
+     例如：北京 -> 北京 -> 朝阳区
+   ========================================================================== */
+var BASE_URL = 'https://web-server.itheima.net';
+
+var provinceSelect = document.getElementById('province');
+var citySelect     = document.getElementById('city');
+var areaSelect     = document.getElementById('area');
+
+/* 发送 GET 请求，取出接口返回的 data 数组 */
+async function fetchList(url) {
+    var response = await fetch(url);        // fetch 默认就是 GET 请求
+    var result   = await response.json();
+    return result.data;
+}
+
+/* 把数据填充进下拉框，并默认选中第 1 项 */
+function fillSelect(select, list) {
+    select.innerHTML = '';
+
+    if (!list || list.length === 0) {       // 该层级没有数据时给个占位项
+        select.innerHTML = '<option value="">—</option>';
+        return;
+    }
+
+    list.forEach(function (item) {
+        var option = document.createElement('option');
+        option.value       = item.id;       // value 存 id
+        option.textContent = item.name;     // 显示文字存 name
+        select.appendChild(option);
+    });
+
+    select.selectedIndex = 0;               // 默认展示第一个
+}
+
+/* 直辖市：省与市同名，接口里没有地级市这一层 */
+var MUNICIPALITIES = ['北京', '上海', '天津', '重庆'];
+var provinceIsMunicipality = false;     // 当前选中的省是不是直辖市
+
+/* 取当前选中省份的名称 */
+function currentProvinceName() {
+    return provinceSelect.options[provinceSelect.selectedIndex].textContent;
+}
+
+/* 加载当前省份下的所有市
+   直辖市特殊处理：没有地级市，直接用省本身作为「市」这一级，
+   于是会呈现「北京 -> 北京 -> 朝阳区」这样的标准三级结构 */
+async function loadCities() {
+    var pid  = provinceSelect.value;
+    var name = currentProvinceName();
+
+    if (!pid) { fillSelect(citySelect, []); return; }
+
+    provinceIsMunicipality = MUNICIPALITIES.indexOf(name) !== -1;
+
+    if (provinceIsMunicipality) {
+        fillSelect(citySelect, [{ id: pid, name: name }]);   // 省即市
+    } else {
+        fillSelect(citySelect, await fetchList(BASE_URL + '/city?pid=' + pid));
+    }
+}
+
+/* 加载当前城市下的所有区
+   普通省份：区挂在市下面，请求 /area?cid=市id
+   直辖市  ：区挂在省下面，请求 /city?pid=省id（此时市 id 就等于省 id） */
+async function loadAreas() {
+    var cid = citySelect.value;
+
+    if (!cid) { fillSelect(areaSelect, []); return; }
+
+    var url = provinceIsMunicipality
+        ? BASE_URL + '/city?pid=' + cid      // 直辖市：从省的下级取区
+        : BASE_URL + '/area?cid=' + cid;     // 普通省份：从市的下级取区
+
+    fillSelect(areaSelect, await fetchList(url));
+}
+
+/* 切换省份：重新加载市，再根据新的第 1 个市加载区 */
+provinceSelect.addEventListener('change', async function () {
+    await loadCities();
+    await loadAreas();
+});
+
+/* 切换城市：重新加载区 */
+citySelect.addEventListener('change', async function () {
+    await loadAreas();
+});
+
+/* 页面加载完毕：依次加载 省 -> 市 -> 区，均默认选中第一个 */
+(async function initRegion() {
+    try {
+        fillSelect(provinceSelect, await fetchList(BASE_URL + '/province'));  // 第 1 个省
+        await loadCities();                                                   // 第 1 个市
+        await loadAreas();                                                    // 第 1 个区
+    } catch (error) {
+        var tip = '<option value="">加载失败</option>';
+        provinceSelect.innerHTML = tip;
+        citySelect.innerHTML     = tip;
+        areaSelect.innerHTML     = tip;
+        console.error('省市区数据加载失败：', error);
+    }
+})();
+</script>
+
+<!-- Vue 3（本地文件，也可换成 CDN：
+     https://cdn.bootcdn.net/ajax/libs/vue/3.4.21/vue.global.prod.min.js ） -->
+<script src="js/vue.global.prod.min.js"></script>
+
+<script>
+/* ==========================================================================
+   Vue 数据渲染：学员信息表
+   用 v-for 遍历 students 数组生成表格行，模板里用 {{ }} 插值显示字段，
+   头像用 :src 动态绑定，性别用 :class 动态切换标签样式。
+   说明：这里用的是 Vue 3 的全局构建版本（含模板编译器），
+        所以可以直接把表格写在 HTML 里当作模板。
+   ========================================================================== */
+if (typeof Vue === 'undefined') {
+    console.error('Vue 未能加载，学员信息表无法渲染；请检查 js/vue.global.prod.min.js 是否存在。');
+} else {
+    Vue.createApp({
+        data() {
+            return {
+                students: [
+                    {
+                        id: 1,
+                        name: '冉世玉',
+                        gender: '男',
+                        major: '网络工程',
+                        className: '232',
+                        avatar: 'images/avatar.svg'
+                    }
+                ]
+            };
+        }
+    }).mount('#student-app');
+}
 </script>
 
 </body>
